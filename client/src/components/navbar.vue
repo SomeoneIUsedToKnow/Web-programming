@@ -4,7 +4,7 @@ import {ref} from 'vue';
 const isActive = ref(false);
 
 //READ HIS CODE FOR NAVBAR THERE ARE MISSED ITEMS
-</script>"
+</script>
 
 <template>
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -13,14 +13,14 @@ const isActive = ref(false);
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="28" height="112" />
     </a>
 
-    <a role="button" class="navbar-burger"  aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" class="navbar-burger" @click="isActive = !isActive" :class="{'is-active' : isActive}" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isActive}">
     <div class="navbar-start">
         
         <RouterLink class="navbar-item" to="/">Home</RouterLink>

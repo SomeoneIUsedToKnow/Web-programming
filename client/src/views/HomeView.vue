@@ -16,27 +16,20 @@ function addTask(){
     <h2 class="subtitle">welcome to vuejs and typescript</h2>
     <nav class="panel">
   <p class="panel-heading">
-    Repositories
+    Exercises
   </p>
   <div class="panel-block">
     <p class="control has-icons-left">
-      <input class="input" type="text" placeholder="Search">
+      <input class="input" type="text" placeholder="What do you want to do?" @keypress.enter="addTask"
+      v-model="newTask">
       <span class="icon is-left">
         <i class="fas fa-search" aria-hidden="true"></i>
       </span>
     </p>
   </div>
-  <p class="panel-tabs">
-    <a class="is-active">All</a>
-    <a>Public</a>
-    <a>Private</a>
-    <a>Sources</a>
-    <a>Forks</a>
-  </p>
- 
-  <label class="panel-block">
-    <input type="checkbox">
-    remember me
+  
+  <label class="panel-block" v-for="task in tasks">
+    {{ task }}
   </label>
  
 </nav>
