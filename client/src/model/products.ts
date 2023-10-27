@@ -1,4 +1,4 @@
-import data from "@/data/products.json";
+import data from "C:\Users\Dat Guy\Desktop\Web-programming\client\src\data\products";
 
 export interface Product {
   id: number;
