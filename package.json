@@ -5,7 +5,9 @@
   "description": "web-programming",
   "main": "index.js",
   "scripts": {
+    "build": "cd client && npm install && npm run build && cd..",
     "start": "node server/index.js",
+
     "dev": "nodemon --watch ./server server/index.js"
   },
   "repository": {
