@@ -1,4 +1,4 @@
-//LOOK AT HIS
+
 {
   "name": "web-programming",
   "version": "1.0.0",
@@ -16,8 +16,8 @@
     "express": "4.17.20"
   },
   "devDependencies": {
-    "nodemon": "3.0.1"
-    "@types/node":
+    "nodemon": "3.0.1",
+    "@types/node":"^20.8.9"
   },
   "keywords": [
     "webprogramming"
