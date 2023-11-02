@@ -1,5 +1,5 @@
-import data from "@/data/products.json";
 
+import data from "@/data/products.json"
 export interface Product {
   id: number;
   title: string;
