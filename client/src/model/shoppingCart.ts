@@ -1,3 +1,5 @@
+/* B"H
+*/
 import { computed, reactive } from "vue";
 import { type Product } from "@/model/products";
 

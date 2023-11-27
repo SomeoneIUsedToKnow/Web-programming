@@ -1,3 +1,9 @@
+/* B"H
+*/
+
+const { ObjectId, connect } = require('./mongo');
+const data = require("../data/products.json");
+
 /**
  * @typedef {Object} Product
  * @property {number} id - The product's ID.
@@ -13,35 +19,96 @@
  * @property {string[]} images - The product's images.
  */
 
-const data = require("../data/products.json");
+const COLLECTION_NAME = 'products';
+async function getCollection() {
+  const db = await connect();
+  return db.collection(COLLECTION_NAME);
+}
+
 
 /**
- * @returns {Product[]} An array of products.
+ * @returns {Promise<Product[]>} An array of products.
  */
-function getProducts() {
-  return data.products;
+async function getAll() {
+  const col = await getCollection();
+  return col.find({}).toArray();
 }
 
 /**
- * @param {number} id - The product's ID.
+ * @param {string} id - The product's ID.
  */
-function getProductById(id) {
-  return data.products.find((product) => product.id === id);
+async function get(id) {
+  const col = await getCollection();
+  return await col.findOne({ _id: ObjectId(id) });
 }
 
-function getProductsByCategory(category) {
-  return data.products.filter((product) => product.category === category);
+async function getByCategory(category) {
+  const col = await getCollection();
+  return await col.findOne({ category });
+
 }
 
-function search(query) {
-  return data.products.filter((product) => {
-    return (
-      product.title.toLowerCase().includes(query.toLowerCase()) ||
-      product.description.toLowerCase().includes(query.toLowerCase())
-    );
-  });
+async function search(query) {
+  const col = await getCollection();
+  const products = await col.find({
+    $or: [
+      { title: { $regex: query, $options: 'i' } },
+      { description: { $regex: query, $options: 'i' } },
+    ],
+  }).toArray();
+
+  return products;
 }
+
+/**
+ * @param {Product} product - The product to create.
+ * @returns {Promise<Product>} The created product.
+ */
+async function create(product) {
+  const newProduct = {
+    id: data.products.length + 1,
+    ...product,
+  };
+  const col = await getCollection();
+  const result = await col.insertOne(newProduct);
+  newProduct._id = result.insertedId;
+
+  return newProduct;
+}
+
+/**
+ * @param {Product} product - The product's data.
+ * @returns {Product} The updated product.
+ */
+async function update(product) {
+
+  const col = await getCollection();
+  const result = await col.findOneAndUpdate(
+    { _id: ObjectId(product.id) },
+    { $set: product },
+    { returnDocument: 'after' },
+  );
+  return result;
+}
+
+/**
+ * @param {string} id - The product's ID.
+ */
+async function remove(id) {
+  const col = await getCollection();
+  const result = await col.deleteOne({ _id: ObjectId(id) });
+  if(result.deletedCount === 0) {
+    throw new Error('Product not found');
+  }
+}
+
+async function seed() {
+  const col = await getCollection();
+
+  await col.insertMany(data.products);
+}
+
 
 module.exports = {
-  getProducts, getProductById, getProductsByCategory, search
+  getAll, get, getByCategory, search, create, update, remove, getCollection, COLLECTION_NAME, seed
 };

@@ -1,5 +1,5 @@
 {
-  "name": "webprogramming",
+  "name": "fall-2023",
   "version": "1.0.0",
   "description": "",
   "author": "",
@@ -11,7 +11,9 @@
     "dev": "nodemon --watch ./server server/index.js"
   },
   "dependencies": {
-    "express": "^4.17.20"
+    "express": "^4.17.20",
+    "dotenv": "^16.3.1",
+    "mongodb": "^6.2.0"
   },
   "devDependencies": {
     "@types/node": "20.8.9",

@@ -1,30 +1,33 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import navbar from './components/navbar.vue';
+import { getSession } from './model/session';
+import NavBar from './components/NavBar.vue';
+
+const session = getSession();
 
 </script>
 
 <template>
   <header>
-    <navbar />
+    <NavBar />
   </header>
 
-    <div class="container">
-    
-      <RouterView />
-    </div>
-  
+  <div class="container">
+    <progress class="progress is-small is-primary is-striped" max="100" v-if="session.loading">15%</progress>
+    <RouterView />
+  </div>
 
 </template>
 
 <style scoped>
-body {
-  background-color: aliceblue;
-}
-.container{
-  background-color: white;
-  box-shadow:burlywood ;
-  padding: 5px;
-  min-height: 100vh;
-}
+  body {
+    background-color: azure;
+  }
+
+  .container {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    min-height: 100vh;
+  }
 </style>
