@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getUsers, type User } from '@/model/asdf';
+import { getUsers, type User } from '@/model/Users';
 import { ref } from 'vue';
 
   const newTask = ref('');
