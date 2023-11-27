@@ -1,4 +1,4 @@
-import data from "@/data/products.json";
+import data from "@/data/products1.json";
 
 import { api } from "./session"
 
