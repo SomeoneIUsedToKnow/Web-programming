@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { getSession } from './model/session';
-import NavBar from './components/NavBar.vue';
+import NavBar from './components/asdf.vue';
 
 const session = getSession();
 
